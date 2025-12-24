@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FleetLogistics Pro</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+    <div class="bg-image-container"></div>
+    <div class="bg-overlay"></div>
+
+    <div id="app" class="relative z-10 min-h-screen flex flex-col">
+        <!-- Content injected by main.js -->
+    </div>
+
+    <!-- Modals -->
+    <div id="parcel-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 transition-opacity">
+        <div class="glass-panel p-8 rounded-2xl w-full max-w-md fade-in">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-main-white flex items-center gap-2">
+                    <i class="ph ph-package text-blue-500"></i> New Shipment
+                </h3>
+                <button id="close-modal-btn" class="text-gray-500 hover:text-main-white transition">
+                    <i class="ph ph-x text-xl"></i>
+                </button>
+            </div>
+            <form id="parcel-form" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-medium text-gray-500 mb-1">Tracking ID</label>
+                    <input type="text" id="tracking-id" required class="glass-input w-full rounded-lg p-3" placeholder="e.g. TRK-998877">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-500 mb-1">Destination</label>
+                    <input type="text" id="destination" required class="glass-input w-full rounded-lg p-3" placeholder="123 Logistics Way, Chicago">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-500 mb-1">Priority Level</label>
+                    <select id="priority" class="glass-input w-full rounded-lg p-3 bg-white">
+                        <option value="Medium" class="bg-white text-main-white">Medium Priority</option>
+                        <option value="High" class="bg-white text-main-white">High Priority</option>
+                        <option value="Low" class="bg-white text-main-white">Low Priority</option>
+                    </select>
+                </div>
+                <div id="form-message" class="hidden text-center text-sm font-semibold"></div>
+                <button type="submit" id="submit-parcel-btn" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 shadow-lg shadow-blue-500/30 transition-all transform hover:-translate-y-0.5 text-white font-bold">
+                    Register Shipment
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="confirmation-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50">
+        <div class="glass-panel p-6 rounded-2xl w-full max-w-sm border-l-4 border-yellow-500 fade-in">
+            <h3 id="confirm-title" class="text-xl font-bold text-main-white mb-2">Confirmation</h3>
+            <p id="confirm-message" class="text-gray-500 mb-4 text-sm leading-relaxed">Are you sure?</p>
+            <input type="text" id="confirm-input" class="glass-input w-full rounded-lg p-2 mb-2 hidden text-sm" placeholder="Type here...">
+            <div id="confirm-error" class="text-red-400 text-xs mb-3 hidden">Input required.</div>
+            <div class="flex justify-end gap-3 mt-4">
+                <button id="cancel-confirm-btn" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 rounded-lg text-slate-800 text-sm transition">Cancel</button>
+                <button id="execute-confirm-btn" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white text-sm font-bold shadow-lg transition">Proceed</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

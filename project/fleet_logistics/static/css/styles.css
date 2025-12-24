@@ -1,0 +1,158 @@
+/* --- GLOBAL STYLES (BRIGHTER THEME) --- */
+body {
+    font-family: 'Inter', sans-serif;
+    color: #334155;
+    overflow-x: hidden;
+}
+
+/* --- BACKGROUND HANDLING --- */
+.bg-image-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Dark overlay with reduced opacity (60-70%)
+   to let the image show while maintaining text contrast. */
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(to bottom right, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.7));
+}
+
+/* --- GLASSMORPHISM UTILITIES (SUBTLE DIM) --- */
+.glass-panel {
+    /* REVISED: Lower opacity (0.65) and pale slate tint. */
+    background: rgba(241, 245, 249, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Darker text on lighter background */
+.text-main-white {
+    color: #1e293b; /* slate-900 */
+}
+
+/* Input fields are now slightly more transparent */
+.glass-input {
+    /* REVISED: Lower opacity for inputs to match the dimmer panel */
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #1e293b; /* Dark text on light input */
+    transition: all 0.3s ease;
+}
+.glass-input::placeholder {
+    color: #94a3b8; /* slate-400 */
+}
+.glass-input:focus {
+    background: rgba(255, 255, 255, 1);
+    border-color: #3b82f6;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+/* Nav bar uses a darker background for contrast */
+.nav-header {
+    background-color: rgba(30, 41, 59, 0.9); /* slate-800 semi-transparent */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+}
+.nav-header .text-white {
+    color: white;
+}
+.nav-header .text-gray-500 {
+    color: #94a3b8;
+}
+.nav-header .text-blue-500 {
+    color: #3b82f6;
+}
+
+
+/* --- MAP STYLING --- */
+#fleet-map {
+    /* Leaflet requires a defined height */
+    height: 500px;
+    width: 100%;
+    border-radius: 0.75rem;
+    z-index: 1;
+}
+
+.map-container-wrapper {
+    transition: max-height 0.4s ease-out, opacity 0.3s ease-out, padding 0.4s ease-out;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding-top: 0;
+}
+
+.map-container-wrapper.open {
+    max-height: 550px;
+    opacity: 1;
+    padding-top: 2rem;
+}
+
+
+/* --- ANIMATIONS --- */
+.fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- STATUS COLORS --- */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.status-Scheduled { background: rgba(251, 191, 36, 0.2); color: #facc15; border: 1px solid rgba(251, 191, 36, 0.3); }
+.status-Processing { background: rgba(59, 130, 246, 0.2); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3); }
+.status-Delivered { background: rgba(34, 197, 94, 0.2); color: #10b981; border: 1px solid rgba(34, 197, 94, 0.3); }
+.status-Returned { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+/* Dropdown - Needs to look good on light background */
+.action-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 50;
+    width: 180px;
+    margin-top: 5px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #1e293b;
+    animation: fadeIn 0.2s ease-out;
+}
+.action-dropdown button {
+    color: #1e293b;
+}
+
+/* Overrides to ensure dark text on light panels */
+.text-white { color: #1e293b; }
+.font-bold.text-white { color: #1e293b; }
+.text-gray-400 { color: #4b5563; }
+.text-gray-500 { color: #6b7280; }
+.text-blue-400 { color: #3b82f6; }
+/* Keep high contrast colors for buttons/stats */
+.bg-blue-600, .bg-red-600, .bg-emerald-600 { color: white !important; }
